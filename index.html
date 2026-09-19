@@ -494,7 +494,7 @@ function viewMenu(){
   var body = list.length ? list.map(dishHTML).join("") :
     '<p class="empty">こちらのメニューは只今ご用意がございません。<br>お手数ですがスタッフまでお尋ねください。</p>';
   return '<div class="shell">'+
-    '<header class="crest"><p class="mark">RISTORANTE</p><h1>'+esc(settings.shopName)+'</h1>'+
+    '<header class="crest"><h1>'+esc(settings.shopName)+'</h1>'+
       (settings.tagline?'<p>'+esc(settings.tagline)+'</p>':'')+'</header>'+
     '<nav class="genres" aria-label="メニューの種類">'+nav+'</nav>'+
     '<section class="gate"><p class="it">'+esc(g.it)+'</p><h2>'+esc(g.name)+'</h2><div class="rule"></div></section>'+
