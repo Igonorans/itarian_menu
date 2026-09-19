@@ -474,7 +474,7 @@ function pickPhoto(file){
 function setOffer(k){
   if(k==="pasta_dry"||k==="pasta_fresh"||k==="meat"||k==="fish")
     return '<div class="offer"><p class="ol">お得なセット</p>'+
-      '<p class="ot">自家製ドレッシングのサラダ + パン + お飲み物</p>'+
+      '<p class="ot">自家製ドレッシングのサラダ・パン・お飲み物</p>'+
       '<p class="op">560<span>円</span><i>（税込610円）</i></p></div>';
   return "";
 }
@@ -744,19 +744,23 @@ render();
     render();
     return;
   }
+  var initial=true;
   function refresh(){
+    /* 入力中の画面（メニュー追加・編集、設定画面）では、自動更新で
+       入力中の内容が消えてしまうのを防ぐため、初回以外はスキップする */
+    if(!initial && (route.view==="form" || route.view==="settings")) return Promise.resolve();
     return loadAll().then(function(){
-      ready=true;
+      ready=true; initial=false;
       if(route.view==="form" && route.id && (!draft||draft.id!==route.id)) draft=makeDraft(route.id);
       dbError=""; render();
     }).catch(function(){
-      ready=true;
+      ready=true; initial=false;
       dbError="メニューの読み込みに失敗しました。接続先の設定、または通信状況をご確認ください。";
       render();
     });
   }
   refresh();
-  setInterval(refresh, 20000); /* 20秒ごとに最新のスプレッドシート内容を取り込む */
+  setInterval(refresh, 20000); /* 20秒ごとに最新のスプレッドシート内容を取り込む（入力中の画面をのぞく） */
   document.addEventListener("visibilitychange", function(){ if(!document.hidden) refresh(); });
 })();
 })();
