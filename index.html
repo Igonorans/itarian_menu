@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
 <title>Trattoria — メニュー</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -111,8 +112,8 @@ nav.genres button[aria-current="true"]{background:var(--ivory);color:var(--groun
 .tag{display:inline-block;font-family:var(--sans);font-size:11px;letter-spacing:.08em;color:var(--ground);
   background:var(--amber);border-radius:2px;padding:2px 7px;margin-left:8px;vertical-align:3px;font-weight:700}
 .empty{padding:60px 0;color:var(--ivory-dim);font-family:var(--serif);line-height:2}
-.foot{margin-top:70px;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;
-  align-items:center;gap:16px;flex-wrap:wrap;color:var(--ivory-dim);font-size:13px}
+.foot{margin-top:70px;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:center;
+  align-items:center;gap:16px;flex-wrap:wrap;color:var(--ivory-dim);font-size:13px;text-align:center}
 .foot button{background:none;border:1px solid var(--line);color:var(--ivory-dim);padding:9px 16px;border-radius:999px;font-size:13px}
 .foot button:hover{color:var(--ivory);border-color:var(--ivory)}
 @media (max-width:560px){
@@ -251,7 +252,7 @@ textarea.inp{min-height:110px;line-height:1.7;resize:vertical}
 /* Google Apps Script を「ウェブアプリ」として公開したときに発行されるURLを
    ここに貼り付けてください（末尾が /exec のURLです）。設定方法は
    別途お渡しした「セットアップ手順」をご覧ください。 */
-var API_URL = "https://script.google.com/macros/s/AKfycbxGFyGBpkpFmzfPMkp3xG-CIEPNfUbBko2rZ_VhfeBgGh7T-qNty37LXdkTTPFFklrp/exec";
+var API_URL = "ここにGoogle Apps ScriptのウェブアプリURLを貼り付けてください";
 
 function apiGet(){
   return fetch(API_URL+"?action=data", {method:"GET"})
@@ -501,8 +502,7 @@ function viewMenu(){
     body+
     pastaNotice(g.key)+
     pastaNotice2(g.key)+
-    '<footer class="foot"><span>表示価格はすべて税込です（税率 '+esc(settings.taxRate)+'％）</span>'+
-      '<button data-go="/admin">お店の方はこちら</button></footer></div>';
+    '<footer class="foot"><span>表示価格はすべて税込です（税率 '+esc(settings.taxRate)+'％）</span></footer></div>';
 }
 function dishHTML(it){
   var k=genre(it.genre).kind, pic=picURL(it.photo);
