@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trattoria — メニュー</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Zen+Old+Mincho:wght@400;600;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#0E2A23;
+  --ground-2:#143a30;
+  --ground-3:#1b4a3d;
+  --ivory:#F1EADA;
+  --ivory-dim:#c9c0ad;
+  --cobalt:#3B6FB5;
+  --amber:#DFA531;
+  --wine:#B23A48;
+  --line:rgba(241,234,218,.22);
+
+  --a-bg:#EEF1EF;
+  --a-card:#FFFFFF;
+  --a-ink:#122019;
+  --a-ink-2:#4a5b53;
+  --a-line:#cdd6d1;
+  --a-blue:#1F5FA9;
+  --a-blue-dk:#17477e;
+  --a-red:#B3303C;
+  --a-green:#16704F;
+  --a-warn:#FFF6DF;
+
+  --serif:"Zen Old Mincho","Bodoni Moda",serif;
+  --display:"Bodoni Moda","Zen Old Mincho",serif;
+  --sans:"Zen Kaku Gothic New",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --a-bg:#101815; --a-card:#17211d; --a-ink:#EAF0EC; --a-ink-2:#a5b5ad;
+    --a-line:#2d3a34; --a-blue:#5A93DC; --a-blue-dk:#7fb0ec; --a-red:#E4737D;
+    --a-green:#4FBF95; --a-warn:#2b2617;
+  }
+}
+:root[data-theme="dark"]{
+  --a-bg:#101815; --a-card:#17211d; --a-ink:#EAF0EC; --a-ink-2:#a5b5ad;
+  --a-line:#2d3a34; --a-blue:#5A93DC; --a-blue-dk:#7fb0ec; --a-red:#E4737D;
+  --a-green:#4FBF95; --a-warn:#2b2617;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--ground);color:var(--ivory);font-family:var(--sans);-webkit-text-size-adjust:100%}
+body.admin{background:var(--a-bg);color:var(--a-ink)}
+img{max-width:100%;display:block}
+button{font:inherit;cursor:pointer}
+input,select,textarea{font:inherit}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--amber);outline-offset:2px;border-radius:3px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ============ CUSTOMER ============ */
+.shell{max-width:1060px;margin:0 auto;padding:0 20px 90px}
+.crest{padding:52px 0 30px;text-align:center;border-bottom:1px solid var(--line)}
+.crest .mark{font-family:var(--display);font-size:13px;letter-spacing:.42em;color:var(--amber);margin:0 0 14px;text-indent:.42em}
+.crest h1{font-family:var(--display);font-weight:400;font-size:clamp(38px,8vw,72px);line-height:1;margin:0}
+.crest p{font-family:var(--serif);color:var(--ivory-dim);margin:16px auto 0;max-width:38em;line-height:1.9;font-size:15px}
+
+nav.genres{display:flex;gap:6px;overflow-x:auto;padding:14px 0;border-bottom:1px solid var(--line);
+  position:sticky;top:0;background:var(--ground);z-index:9;scrollbar-width:thin}
+nav.genres button{background:none;border:0;color:var(--ivory-dim);font-family:var(--serif);font-size:15px;
+  padding:9px 15px;border-radius:999px;white-space:nowrap;flex:0 0 auto}
+nav.genres button:hover{color:var(--ivory)}
+nav.genres button[aria-current="true"]{background:var(--ivory);color:var(--ground);font-weight:600}
+
+.gate{padding:64px 0 10px}
+.gate h2{font-family:var(--display);font-weight:400;font-size:clamp(30px,5vw,44px);margin:0}
+.gate .it{font-family:var(--display);font-style:italic;color:var(--amber);font-size:17px;margin:0 0 6px}
+.gate .rule{height:1px;background:var(--line);margin:22px 0 0}
+.notice{font-family:var(--serif);font-size:13.5px;color:var(--amber);background:var(--ground-2);
+  border-left:3px solid var(--amber);border-radius:2px;padding:12px 16px;margin:22px 0 0;line-height:1.8}
+
+.offer{margin:22px 0 0;border:1px solid var(--amber);border-radius:3px;padding:22px 24px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  background:linear-gradient(180deg,rgba(223,165,49,.10),rgba(223,165,49,0))}
+.offer .ol{font-family:var(--display);font-style:italic;color:var(--amber);font-size:13px;
+  letter-spacing:.06em;margin:0 0 6px}
+.offer .ot{font-family:var(--serif);color:var(--ivory);font-size:15.5px;line-height:1.7;margin:0;max-width:32em}
+.offer .op{font-family:var(--display);color:var(--amber);font-size:32px;line-height:1;margin:0;white-space:nowrap}
+.offer .op span{font-size:16px;margin-left:2px}
+.offer .op i{display:block;font-style:normal;font-family:var(--sans);color:var(--ivory-dim);font-size:12px;margin-top:6px;text-align:right}
+@media (max-width:560px){.offer{padding:18px}.offer .op{font-size:27px}}
+
+.dish{display:grid;grid-template-columns:96px 1fr;gap:20px;padding:28px 0;border-bottom:1px solid var(--line);align-items:start}
+.dish.nopic{grid-template-columns:1fr}
+.dish .pic{width:96px;height:96px;object-fit:cover;border-radius:2px;background:var(--ground-3)}
+.dish h3{font-family:var(--serif);font-weight:600;font-size:20px;margin:0;line-height:1.45}
+.leader{display:flex;align-items:baseline;gap:10px}
+.leader .dots{flex:1;border-bottom:1px dotted var(--line);transform:translateY(-4px)}
+.price{font-family:var(--display);font-size:20px;white-space:nowrap}
+.desc{font-family:var(--serif);color:var(--ivory-dim);line-height:1.95;margin:10px 0 0;font-size:14.5px;max-width:46em}
+.sub{margin:14px 0 0;padding:0 0 0 18px;list-style:none;display:grid;gap:7px;
+  border-left:1px solid var(--line)}
+.sub li{display:flex;align-items:baseline;gap:10px;font-size:13.5px;color:var(--ivory-dim);padding-left:2px}
+.sub li .dots{flex:1;border-bottom:1px dotted var(--line);transform:translateY(-4px)}
+.sub li b{font-weight:400;color:var(--ivory)}
+.sub .p{font-family:var(--display);color:var(--ivory);white-space:nowrap}
+.corso{margin:14px 0 0;padding:16px 18px;background:var(--ground-2);border-left:3px solid var(--amber);border-radius:2px}
+.corso ol{margin:0;padding-left:1.2em;display:grid;gap:11px;font-family:var(--serif);font-size:14.5px;line-height:1.7;color:var(--ivory)}
+.corso ol li::marker{color:var(--amber)}
+.corso ol li span{display:block;color:var(--ivory-dim);font-size:13px;line-height:1.8;margin-top:2px}
+.tag{display:inline-block;font-family:var(--sans);font-size:11px;letter-spacing:.08em;color:var(--ground);
+  background:var(--amber);border-radius:2px;padding:2px 7px;margin-left:8px;vertical-align:3px;font-weight:700}
+.empty{padding:60px 0;color:var(--ivory-dim);font-family:var(--serif);line-height:2}
+.foot{margin-top:70px;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;
+  align-items:center;gap:16px;flex-wrap:wrap;color:var(--ivory-dim);font-size:13px}
+.foot button{background:none;border:1px solid var(--line);color:var(--ivory-dim);padding:9px 16px;border-radius:999px;font-size:13px}
+.foot button:hover{color:var(--ivory);border-color:var(--ivory)}
+@media (max-width:560px){
+  .dish{grid-template-columns:72px 1fr;gap:14px}
+  .dish .pic{width:72px;height:72px}
+  .dish h3{font-size:17.5px}
+  .price{font-size:18px}
+}
+
+/* ============ ADMIN ============ */
+.abar{background:var(--a-card);border-bottom:2px solid var(--a-line);position:sticky;top:0;z-index:20}
+.abar .in{max-width:880px;margin:0 auto;padding:14px 18px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.abar .who{font-weight:700;font-size:18px;margin-right:auto}
+.abar .who span{display:block;font-size:12.5px;font-weight:400;color:var(--a-ink-2);margin-top:2px}
+.awrap{max-width:880px;margin:0 auto;padding:22px 18px 120px;font-size:17px;line-height:1.7}
+.awrap h2{font-size:26px;margin:4px 0 6px}
+.awrap .lead{color:var(--a-ink-2);font-size:15.5px;margin:0 0 26px}
+
+.big{display:block;width:100%;text-align:left;background:var(--a-card);border:2px solid var(--a-line);
+  border-radius:14px;padding:22px 24px;margin-bottom:14px;color:inherit}
+.big strong{display:block;font-size:21px;margin-bottom:4px}
+.big small{font-size:14.5px;color:var(--a-ink-2);line-height:1.6;display:block}
+.big:hover{border-color:var(--a-blue);background:color-mix(in srgb,var(--a-blue) 7%,var(--a-card))}
+
+.card{background:var(--a-card);border:2px solid var(--a-line);border-radius:14px;padding:22px;margin-bottom:18px}
+.card > h3{margin:0 0 4px;font-size:19px;display:flex;gap:10px;align-items:center}
+.card > h3 i{font-style:normal;background:var(--a-blue);color:#fff;width:28px;height:28px;border-radius:50%;
+  display:grid;place-items:center;font-size:15px;font-weight:700;flex:0 0 auto}
+.card > .hint{color:var(--a-ink-2);font-size:14.5px;margin:0 0 16px;padding-left:38px}
+.card .body{padding-left:38px}
+@media (max-width:560px){.card > .hint,.card .body{padding-left:0}}
+
+label.f{display:block;margin-bottom:16px}
+label.f > span{display:block;font-weight:700;margin-bottom:7px;font-size:15.5px}
+label.f > span em{font-style:normal;color:var(--a-red);font-size:13.5px;margin-left:6px}
+label.f > span b{font-weight:400;color:var(--a-ink-2);font-size:13.5px;display:block;margin-top:2px}
+.inp,textarea.inp,select.inp{width:100%;padding:13px 14px;border:2px solid var(--a-line);border-radius:10px;
+  background:var(--a-bg);color:var(--a-ink);font-size:17px}
+.inp:focus{border-color:var(--a-blue)}
+textarea.inp{min-height:110px;line-height:1.7;resize:vertical}
+.yen{display:flex;align-items:center;gap:10px}
+.yen .inp{max-width:200px;text-align:right}
+.yen b{font-weight:700;font-size:17px}
+
+.genrepick{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:10px}
+.genrepick button{padding:16px;border-radius:12px;border:2px solid var(--a-line);background:var(--a-bg);
+  color:inherit;text-align:left;font-size:16.5px;font-weight:500;line-height:1.4}
+.genrepick button em{display:block;font-style:italic;font-family:var(--display);color:var(--a-ink-2);font-size:13.5px;margin-top:3px}
+.genrepick button[aria-pressed="true"]{background:var(--a-blue);border-color:var(--a-blue);color:#fff}
+.genrepick button[aria-pressed="true"] em{color:rgba(255,255,255,.8)}
+
+.rows{display:grid;gap:10px;margin-bottom:12px}
+.row{display:flex;gap:10px;align-items:center}
+.row .inp{flex:1;min-width:0}
+.row .inp.p{flex:0 0 130px;text-align:right}
+.row .x{flex:0 0 auto;width:46px;height:46px;border-radius:10px;border:2px solid var(--a-line);
+  background:var(--a-bg);color:var(--a-red);font-size:21px;line-height:1;display:grid;place-items:center}
+.row .x:hover{border-color:var(--a-red)}
+@media (max-width:560px){.row{flex-wrap:wrap}.row .inp.p{flex:1 1 120px}}
+
+.crow{display:flex;gap:12px;align-items:flex-start;background:var(--a-bg);border:2px solid var(--a-line);
+  border-radius:12px;padding:12px}
+.crow .no{flex:0 0 auto;width:34px;height:34px;border-radius:50%;background:var(--a-card);border:2px solid var(--a-line);
+  display:grid;place-items:center;font-weight:700;font-size:15px;margin-top:5px}
+.crow .fields{flex:1;min-width:0;display:grid;gap:8px}
+.crow .fields .inp{background:var(--a-card)}
+.crow .fields .inp.small{font-size:15px;padding:10px 12px;color:var(--a-ink-2)}
+.crow .x{margin-top:5px;background:var(--a-card)}
+.count{margin:12px 0 0;font-size:14.5px;color:var(--a-ink-2);text-align:right}
+
+.btn{border:0;border-radius:11px;padding:15px 26px;font-size:17px;font-weight:700;background:var(--a-blue);color:#fff}
+.btn:hover{background:var(--a-blue-dk)}
+.btn.ghost{background:var(--a-bg);color:var(--a-ink);border:2px solid var(--a-line);font-weight:500}
+.btn.ghost:hover{border-color:var(--a-ink-2)}
+.btn.danger{background:var(--a-red)}
+.btn.sm{padding:10px 16px;font-size:15px;border-radius:9px}
+.btn.add{background:var(--a-bg);color:var(--a-blue);border:2px dashed var(--a-line);font-weight:700;width:100%;text-align:center}
+.btn.add:hover{border-color:var(--a-blue);background:color-mix(in srgb,var(--a-blue) 7%,var(--a-card))}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+.actions .grow{flex:1 1 220px}
+
+.check{display:flex;gap:12px;align-items:flex-start;background:var(--a-bg);border:2px solid var(--a-line);
+  border-radius:11px;padding:15px;cursor:pointer}
+.check input{width:24px;height:24px;margin:1px 0 0;flex:0 0 auto;accent-color:var(--a-blue)}
+.check span{font-weight:700;font-size:16.5px}
+.check span b{display:block;font-weight:400;font-size:14px;color:var(--a-ink-2);margin-top:2px}
+
+.photo{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.photo .pv{width:110px;height:110px;border-radius:11px;object-fit:cover;border:2px solid var(--a-line);background:var(--a-bg)}
+.photo .ph{width:110px;height:110px;border-radius:11px;border:2px dashed var(--a-line);display:grid;place-items:center;
+  color:var(--a-ink-2);font-size:13px;text-align:center;padding:8px;line-height:1.5}
+
+.list{display:grid;gap:12px}
+.item{background:var(--a-card);border:2px solid var(--a-line);border-radius:13px;padding:15px;display:grid;
+  grid-template-columns:64px 1fr auto;gap:14px;align-items:center}
+.item .th{width:64px;height:64px;border-radius:9px;object-fit:cover;background:var(--a-bg);border:1px solid var(--a-line)}
+.item .th.ph{display:grid;place-items:center;color:var(--a-ink-2);font-size:11px}
+.item .nm{font-weight:700;font-size:17px;line-height:1.4}
+.item .mt{color:var(--a-ink-2);font-size:14px;margin-top:3px}
+.item .ops{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.item .mv{display:grid;gap:4px}
+.item .mv button{width:38px;height:28px;border-radius:7px;border:2px solid var(--a-line);background:var(--a-bg);color:var(--a-ink);line-height:1}
+@media (max-width:620px){.item{grid-template-columns:56px 1fr}.item .th{width:56px;height:56px}.item .ops{grid-column:1/-1;justify-content:flex-start}}
+
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.filters button{padding:9px 15px;border-radius:999px;border:2px solid var(--a-line);background:var(--a-card);color:inherit;font-size:14.5px}
+.filters button[aria-pressed="true"]{background:var(--a-ink);color:var(--a-card);border-color:var(--a-ink)}
+
+.note{background:var(--a-warn);border:2px solid color-mix(in srgb,var(--a-line) 70%,transparent);
+  border-radius:11px;padding:15px 17px;font-size:15px;line-height:1.75;margin-bottom:18px}
+.err{background:color-mix(in srgb,var(--a-red) 12%,var(--a-card));border:2px solid var(--a-red);
+  border-radius:11px;padding:15px 17px;font-size:15.5px;margin-bottom:18px;line-height:1.7}
+.blank{text-align:center;color:var(--a-ink-2);padding:56px 20px;border:2px dashed var(--a-line);border-radius:14px;line-height:1.9}
+
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:var(--a-green);color:#fff;
+  padding:15px 26px;border-radius:999px;font-weight:700;font-size:16px;z-index:60;box-shadow:0 8px 28px rgba(0,0,0,.28);max-width:90vw;text-align:center}
+.sticky{position:fixed;left:0;right:0;bottom:0;background:var(--a-card);border-top:2px solid var(--a-line);
+  padding:13px 18px;z-index:30}
+.sticky .in{max-width:880px;margin:0 auto;display:flex;gap:12px}
+.sticky .in .btn{flex:1}
+.modal{position:fixed;inset:0;background:rgba(6,14,11,.6);display:grid;place-items:center;padding:20px;z-index:70}
+.modal .box{background:var(--a-card);border-radius:16px;padding:26px;max-width:440px;width:100%;line-height:1.75}
+.modal h3{margin:0 0 10px;font-size:20px}
+.loading{padding:70px 20px;text-align:center;color:var(--a-ink-2)}
+</style>
+</head>
+<body>
+<div id="app"><div class="loading">読み込んでいます…</div></div>
+
+<script>
+(function(){
+"use strict";
+
+/* ---------- スプレッドシート連携先 ---------- */
+/* Google Apps Script を「ウェブアプリ」として公開したときに発行されるURLを
+   ここに貼り付けてください（末尾が /exec のURLです）。設定方法は
+   別途お渡しした「セットアップ手順」をご覧ください。 */
+var API_URL = "https://script.google.com/macros/s/AKfycbxGFyGBpkpFmzfPMkp3xG-CIEPNfUbBko2rZ_VhfeBgGh7T-qNty37LXdkTTPFFklrp/exec";
+
+function apiGet(){
+  return fetch(API_URL+"?action=data", {method:"GET"})
+    .then(function(r){ if(!r.ok) throw new Error("http "+r.status); return r.json(); });
+}
+function apiPost(action, payload){
+  return fetch(API_URL, {
+    method:"POST",
+    headers:{"Content-Type":"text/plain;charset=utf-8"}, /* text/plainでpreflightを回避 */
+    body:JSON.stringify({action:action, payload:payload})
+  }).then(function(r){ if(!r.ok) throw new Error("http "+r.status); return r.json(); })
+    .then(function(j){ if(j && j.error) throw new Error(j.error); return j; });
+}
+function apiConfigured(){ return /^https:\/\/script\.google\.com\/.+\/exec$/.test(API_URL); }
+function loadAll(){
+  return apiGet().then(function(d){
+    items = d.items||[];
+    settings = Object.assign({}, DEFAULTS, d.settings||{});
+  });
+}
+
+/* ---------- 定数 ---------- */
+var GENRES = [
+  {key:"course",     name:"コースとセットメニュー", it:"Menu degustazione", kind:"course"},
+  {key:"pasta_dry",  name:"パスタ（乾麺）",        it:"Pasta secca",       kind:"half"},
+  {key:"pasta_fresh",name:"パスタ（手打ち麺）",    it:"Pasta fresca",      kind:"half"},
+  {key:"meat",       name:"お肉料理とサラダ",      it:"Carne e insalata",  kind:"options"},
+  {key:"fish",       name:"魚介料理とその他",      it:"Pesce e altro",     kind:"options"},
+  {key:"drink",      name:"お飲み物",              it:"Bevande",           kind:"options"},
+  {key:"dolce",      name:"デザート",              it:"Dolci",             kind:"options"}
+];
+function genre(k){ for(var i=0;i<GENRES.length;i++) if(GENRES[i].key===k) return GENRES[i]; return GENRES[0]; }
+
+var DEFAULTS = {shopName:"Trattoria", tagline:"", taxRate:10, taxMode:"excluded", rounding:"floor"};
+
+/* ---------- 状態 ---------- */
+var ready=false, dbError="";
+var items=[], settings=Object.assign({},DEFAULTS);
+var route={view:"menu", genre:"course"};
+var draft=null, saving=false, confirmDel=null, toastTimer=null;
+
+/* ---------- ユーティリティ ---------- */
+function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g,function(c){
+  return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+function num(v){ var n=parseFloat(String(v).replace(/[^0-9.\-]/g,"")); return isFinite(n)?n:null; }
+function yen(n){ return "¥"+Math.round(n).toLocaleString("ja-JP"); }
+function withTax(p){
+  if(p==null) return null;
+  if(settings.taxMode==="included") return Math.round(p);
+  var v=p*(1+(Number(settings.taxRate)||0)/100);
+  if(settings.rounding==="ceil") return Math.ceil(v);
+  if(settings.rounding==="round") return Math.round(v);
+  return Math.floor(v);
+}
+function priceText(p){ var v=withTax(p); return v==null?"":yen(v); }
+function picURL(url){ return url || ""; }
+function sorted(list){ return list.slice().sort(function(a,b){ return (a.order||0)-(b.order||0); }); }
+function byGenre(k){ return sorted(items.filter(function(x){ return x.genre===k; })); }
+
+function toast(msg){
+  var old=document.querySelector(".toast"); if(old) old.remove();
+  var t=document.createElement("div"); t.className="toast"; t.setAttribute("role","status"); t.textContent=msg;
+  document.body.appendChild(t);
+  clearTimeout(toastTimer); toastTimer=setTimeout(function(){ t.remove(); },2600);
+}
+
+/* ---------- ルーティング ---------- */
+function readHash(){
+  var h=(location.hash||"").replace(/^#\/?/,"");
+  var p=h.split("/").filter(Boolean);
+  if(p[0]==="admin"){
+    if(p[1]==="new")      return {view:"form", id:null};
+    if(p[1]==="edit")     return {view:"form", id:p[2]||null};
+    if(p[1]==="list")     return {view:"list", filter:p[2]||"all"};
+    if(p[1]==="settings") return {view:"settings"};
+    return {view:"home"};
+  }
+  if(p[0]==="g" && p[1]) return {view:"menu", genre:genre(p[1]).key};
+  return {view:"menu", genre:"course"};
+}
+function go(hash){ location.hash=hash; }
+window.addEventListener("hashchange", function(){
+  route=readHash();
+  if(route.view==="form") draft=makeDraft(route.id);
+  window.scrollTo(0,0);
+  render();
+});
+
+/* ---------- 下書き ---------- */
+function normCourse(c){
+  var out=(c||[]).map(function(x){
+    return typeof x==="string" ? {name:x, desc:""} : {name:x.name||"", desc:x.desc||""}; });
+  while(out.length<3) out.push({name:"",desc:""});
+  return out;
+}
+function makeDraft(id){
+  if(id){
+    for(var i=0;i<items.length;i++) if(items[i].id===id){
+      var s=items[i];
+      return {id:s.id, genre:s.genre, name:s.name||"", price:s.price==null?"":String(s.price),
+        desc:s.desc||"", photo:s.photo||"", order:s.order||0,
+        course:normCourse(s.course), halfOn:!!s.halfOn, halfPrice:s.halfPrice==null?"":String(s.halfPrice),
+        options:(s.options||[]).map(function(o){return {label:o.label,price:o.price==null?"":String(o.price)};})};
+    }
+  }
+  return {id:null, genre:"", name:"", price:"", desc:"", photo:"", order:0,
+    course:[{name:"",desc:""},{name:"",desc:""},{name:"",desc:""},{name:"",desc:""},{name:"",desc:""}],
+    halfOn:false, halfPrice:"", options:[{label:"",price:""}]};
+}
+function grabForm(){
+  if(!draft) return;
+  var g=function(sel){ var e=document.querySelector(sel); return e?e.value:null; };
+  var v;
+  v=g("#f-name");  if(v!==null) draft.name=v;
+  v=g("#f-price"); if(v!==null) draft.price=v;
+  v=g("#f-desc");  if(v!==null) draft.desc=v;
+  v=g("#f-half");  if(v!==null) draft.halfPrice=v;
+  var hc=document.querySelector("#f-halfon"); if(hc) draft.halfOn=hc.checked;
+  var cs=document.querySelectorAll("[data-course]"), cd=document.querySelectorAll("[data-course-desc]");
+  if(cs.length){ draft.course=[]; for(var i=0;i<cs.length;i++)
+    draft.course.push({name:cs[i].value, desc:cd[i]?cd[i].value:""}); }
+  var ol=document.querySelectorAll("[data-opt-label]"), op=document.querySelectorAll("[data-opt-price]");
+  if(ol.length){ draft.options=[]; for(var j=0;j<ol.length;j++) draft.options.push({label:ol[j].value, price:op[j]?op[j].value:""}); }
+}
+
+/* ---------- 保存 ---------- */
+function validate(){
+  if(!draft.genre) return "ジャンルを選んでください。";
+  if(!draft.name.trim()) return "料理の名前を入れてください。";
+  var k=genre(draft.genre).kind;
+  var hasOpt = k==="options" && draft.options.some(function(o){ return o.label.trim()!==""; });
+  if(num(draft.price)==null && !hasOpt) return "値段を入れてください。（選択肢ごとに値段が違う場合は、選択肢を入れれば空欄のままで大丈夫です）";
+  if(k==="half" && draft.halfOn && num(draft.halfPrice)==null) return "ハーフサイズの値段を入れてください。";
+  return "";
+}
+function save(){
+  grabForm();
+  var msg=validate();
+  if(msg){ toast(msg); return; }
+  if(!apiConfigured()){ toast("スプレッドシートとの接続先URLが設定されていません"); return; }
+  var k=genre(draft.genre).kind;
+  var rec={
+    id: draft.id||undefined,
+    genre:draft.genre, name:draft.name.trim(), price:num(draft.price),
+    desc:draft.desc.trim(), photo:draft.photo||"",
+    order: draft.id ? draft.order : (items.length?Math.max.apply(null,items.map(function(x){return x.order||0;}))+1:1),
+    course: k==="course" ? draft.course.map(function(c){ return {name:c.name.trim(), desc:c.desc.trim()}; })
+            .filter(function(c){ return c.name!==""||c.desc!==""; }) : [],
+    halfOn: k==="half" ? !!draft.halfOn : false,
+    halfPrice: (k==="half" && draft.halfOn) ? num(draft.halfPrice) : null,
+    options: k==="options" ? draft.options.filter(function(o){return o.label.trim()!=="";})
+             .map(function(o){ return {label:o.label.trim(), price:num(o.price)}; }) : []
+  };
+  var wasEditing=!!draft.id;
+  saving=true; render();
+  apiPost("saveItem", rec).then(function(){ return loadAll(); }).then(function(){
+    saving=false; toast(wasEditing?"メニューを直しました":"メニューを追加しました"); go("/admin/list");
+  }).catch(function(){
+    saving=false; render(); toast("保存できませんでした。もう一度お試しください");
+  });
+}
+function removeItem(it){
+  apiPost("deleteItem", {id:it.id}).then(function(){ return loadAll(); }).then(function(){
+    toast("メニューを削除しました"); confirmDel=null; render();
+  }).catch(function(){ toast("削除できませんでした"); });
+}
+function swapOrder(list,i,j){
+  if(j<0||j>=list.length) return;
+  var a=list[i], b=list[j], ao=a.order||0, bo=b.order||0;
+  if(ao===bo){ ao=i; bo=j; }
+  apiPost("setOrder", [{id:a.id,order:bo},{id:b.id,order:ao}])
+    .then(function(){ return loadAll(); }).then(render)
+    .catch(function(){ toast("並び替えできませんでした"); });
+}
+function saveSettings(){
+  var g=function(id){ var e=document.getElementById(id); return e?e.value:""; };
+  var rate=num(g("s-rate"));
+  if(rate==null||rate<0||rate>100){ toast("税率は0〜100の数字で入れてください"); return; }
+  var rec={shopName:g("s-shop").trim()||DEFAULTS.shopName, tagline:g("s-tag").trim(),
+           taxRate:rate, taxMode:g("s-mode"), rounding:g("s-round")};
+  apiPost("saveSettings", rec).then(function(){ return loadAll(); }).then(function(){
+    toast("設定を保存しました"); render();
+  }).catch(function(){ toast("保存できませんでした"); });
+}
+
+/* ---------- 写真 ---------- */
+function shrink(file){
+  return new Promise(function(res){
+    if(!window.createImageBitmap||!/^image\//.test(file.type)) return res(file);
+    createImageBitmap(file).then(function(img){
+      var max=1400, w=img.width, h=img.height;
+      if(Math.max(w,h)>max){ var s=max/Math.max(w,h); w=Math.round(w*s); h=Math.round(h*s); }
+      var c=document.createElement("canvas"); c.width=w; c.height=h;
+      c.getContext("2d").drawImage(img,0,0,w,h);
+      c.toBlob(function(b){ res(b||file); },"image/jpeg",.85);
+    }).catch(function(){ res(file); });
+  });
+}
+function toBase64(blob){
+  return new Promise(function(res,rej){
+    var r=new FileReader();
+    r.onload=function(){ res(String(r.result).split(",")[1]); };
+    r.onerror=rej; r.readAsDataURL(blob);
+  });
+}
+function pickPhoto(file){
+  if(!file) return;
+  if(!apiConfigured()){ toast("スプレッドシートとの接続先URLが設定されていません"); return; }
+  toast("写真を登録しています…");
+  shrink(file).then(function(b){
+    return toBase64(b).then(function(b64){
+      return apiPost("uploadPhoto", {base64:b64, mimeType:(b.type||"image/jpeg"), filename:"photo"});
+    });
+  }).then(function(r){ grabForm(); draft.photo=r.url; render(); toast("写真を登録しました"); })
+  .catch(function(){ toast("写真を登録できませんでした"); });
+}
+
+/* ================= 画面：お客様用 ================= */
+function setOffer(k){
+  if(k==="pasta_dry"||k==="pasta_fresh"||k==="meat"||k==="fish")
+    return '<div class="offer"><p class="ol">お得なセット</p>'+
+      '<p class="ot">自家製ドレッシングのサラダ・パン・お飲み物</p>'+
+      '<p class="op">560<span>円</span><i>（税込610円）</i></p></div>';
+  return "";
+}
+function pastaNotice(k){
+  if(k==="pasta_dry")   return '<p class="notice">乾麺から手打ちパスタへの変更は50円（税込50円）かかります</p>';
+  if(k==="pasta_fresh") return '<p class="notice">手打ち麺から乾麺への変更は無料です</p>';
+  return "";
+}
+function pastaNotice2(k){
+  if(k==="pasta_dry"||k==="pasta_fresh") return '<p class="notice">辛さ、麺の硬さ、塩、胡椒などはスタッフまで</p>';
+  return "";
+}
+function viewMenu(){
+  var g=genre(route.genre), list=byGenre(g.key);
+  var nav=GENRES.map(function(x){
+    return '<button data-go="/g/'+x.key+'" aria-current="'+(x.key===g.key)+'">'+esc(x.name)+'</button>'; }).join("");
+  var body = list.length ? list.map(dishHTML).join("") :
+    '<p class="empty">こちらのメニューは只今ご用意がございません。<br>お手数ですがスタッフまでお尋ねください。</p>';
+  return '<div class="shell">'+
+    '<header class="crest"><p class="mark">RISTORANTE</p><h1>'+esc(settings.shopName)+'</h1>'+
+      (settings.tagline?'<p>'+esc(settings.tagline)+'</p>':'')+'</header>'+
+    '<nav class="genres" aria-label="メニューの種類">'+nav+'</nav>'+
+    '<section class="gate"><p class="it">'+esc(g.it)+'</p><h2>'+esc(g.name)+'</h2><div class="rule"></div></section>'+
+    setOffer(g.key)+
+    body+
+    pastaNotice(g.key)+
+    pastaNotice2(g.key)+
+    '<footer class="foot"><span>表示価格はすべて税込です（税率 '+esc(settings.taxRate)+'％）</span>'+
+      '<button data-go="/admin">お店の方はこちら</button></footer></div>';
+}
+function dishHTML(it){
+  var k=genre(it.genre).kind, pic=picURL(it.photo);
+  var head='<div class="leader"><h3>'+esc(it.name)+
+    (k==="half"&&it.halfOn?'<span class="tag">ハーフあり</span>':'')+'</h3>'+
+    '<span class="dots"></span>'+(it.price!=null?'<span class="price">'+priceText(it.price)+'</span>':'')+'</div>';
+  var extra="";
+  if(k==="course" && it.course && it.course.length)
+    extra='<div class="corso"><ol>'+normCourse(it.course).filter(function(c){return c.name||c.desc;})
+      .map(function(c){ return '<li>'+esc(c.name)+(c.desc?'<span>'+esc(c.desc)+'</span>':'')+'</li>'; }).join("")+'</ol></div>';
+  if(k==="half" && it.halfOn && it.halfPrice!=null)
+    extra='<ul class="sub"><li><b>ハーフサイズ</b><span class="dots"></span><span class="p">'+priceText(it.halfPrice)+'</span></li></ul>';
+  if(k==="options" && it.options && it.options.length)
+    extra='<ul class="sub">'+it.options.map(function(o){
+      return '<li><b>'+esc(o.label)+'</b><span class="dots"></span>'+
+        (o.price!=null?'<span class="p">'+priceText(o.price)+'</span>':'')+'</li>'; }).join("")+'</ul>';
+  return '<article class="dish'+(pic?'':' nopic')+'">'+
+    (pic?'<img class="pic" src="'+pic+'" alt="" loading="lazy">':'')+
+    '<div>'+head+(it.desc?'<p class="desc">'+esc(it.desc).replace(/\n/g,"<br>")+'</p>':'')+extra+'</div></article>';
+}
+
+/* ================= 画面：管理用 ================= */
+function adminShell(inner, sticky){
+  return '<div class="abar"><div class="in"><div class="who">お店の管理画面<span>'+esc(settings.shopName)+'</span></div>'+
+    '<button class="btn ghost sm" data-go="/">お客様の画面を見る</button></div></div>'+
+    '<main class="awrap">'+(dbError?'<div class="err">'+esc(dbError)+'</div>':'')+inner+'</main>'+(sticky||"");
+}
+function viewHome(){
+  var n=items.length;
+  return adminShell(
+    '<h2>いらっしゃいませ</h2><p class="lead">やりたいことを下から選んでください。</p>'+
+    '<button class="big" data-go="/admin/new"><strong>＋ メニューを追加する</strong>'+
+      '<small>お客様の画面に新しい料理を出します。名前・値段・説明・写真を入れるだけです。</small></button>'+
+    '<button class="big" data-go="/admin/list"><strong>登録したメニューを直す・消す</strong>'+
+      '<small>いま'+n+'件のメニューが登録されています。値段の変更や、売り切れの取り下げもここから。</small></button>'+
+    '<button class="big" data-go="/admin/settings"><strong>税率とお店の設定</strong>'+
+      '<small>いまの税率は'+esc(settings.taxRate)+'％（'+(settings.taxMode==="included"?"値段は税込で入力":"値段は税抜で入力")+'）。</small></button>');
+}
+
+function viewList(){
+  var f=route.filter||"all";
+  var list = f==="all" ? sorted(items) : byGenre(f);
+  var tabs='<button data-filter="all" aria-pressed="'+(f==="all")+'">すべて（'+items.length+'）</button>'+
+    GENRES.map(function(g){ var c=items.filter(function(x){return x.genre===g.key;}).length;
+      return '<button data-filter="'+g.key+'" aria-pressed="'+(f===g.key)+'">'+esc(g.name)+'（'+c+'）</button>'; }).join("");
+  var body = list.length ? '<div class="list">'+list.map(function(it,i){ return itemRow(it,i,list); }).join("")+'</div>'
+    : '<div class="blank">まだメニューがありません。<br>下の「メニューを追加する」から登録してください。</div>';
+  var modal="";
+  if(confirmDel){
+    modal='<div class="modal"><div class="box"><h3>「'+esc(confirmDel.name)+'」を削除しますか？</h3>'+
+      '<p>お客様の画面からすぐに消えます。元に戻すことはできません。</p>'+
+      '<div class="actions"><button class="btn danger grow" data-del-yes="1">削除する</button>'+
+      '<button class="btn ghost grow" data-del-no="1">やめる</button></div></div></div>';
+  }
+  return adminShell('<h2>登録したメニュー</h2><p class="lead">直したいメニューの「直す」を押してください。</p>'+
+    '<div class="filters">'+tabs+'</div>'+body+modal,
+    '<div class="sticky"><div class="in"><button class="btn ghost" data-go="/admin">もどる</button>'+
+    '<button class="btn" data-go="/admin/new">＋ メニューを追加する</button></div></div>');
+}
+function itemRow(it,i,list){
+  var g=genre(it.genre), pic=picURL(it.photo), meta=[g.name];
+  if(it.price!=null) meta.push(priceText(it.price)+"（税込）");
+  if(g.kind==="half"&&it.halfOn) meta.push("ハーフ "+priceText(it.halfPrice));
+  if(g.kind==="options"&&it.options.length) meta.push("選択肢"+it.options.length+"件");
+  if(g.kind==="course"&&it.course&&it.course.length) meta.push("全"+it.course.length+"品");
+  return '<div class="item">'+
+    (pic?'<img class="th" src="'+pic+'" alt="">':'<div class="th ph">写真なし</div>')+
+    '<div><div class="nm">'+esc(it.name)+'</div><div class="mt">'+esc(meta.join(" ／ "))+'</div></div>'+
+    '<div class="ops"><div class="mv">'+
+      '<button data-up="'+it.id+'" '+(i===0?"disabled":"")+' aria-label="上へ">▲</button>'+
+      '<button data-down="'+it.id+'" '+(i===list.length-1?"disabled":"")+' aria-label="下へ">▼</button></div>'+
+      '<button class="btn sm" data-go="/admin/edit/'+it.id+'">直す</button>'+
+      '<button class="btn sm ghost" data-del="'+it.id+'">削除</button></div></div>';
+}
+
+function viewForm(){
+  if(!draft) draft=makeDraft(null);
+  var editing=!!draft.id, g=draft.genre?genre(draft.genre):null, k=g?g.kind:"";
+  var pick=GENRES.map(function(x){
+    return '<button data-genre="'+x.key+'" aria-pressed="'+(draft.genre===x.key)+'">'+esc(x.name)+'<em>'+esc(x.it)+'</em></button>'; }).join("");
+
+  var s1='<section class="card"><h3><i>1</i>どのジャンルに出しますか？</h3>'+
+    '<p class="hint">選んだジャンルのページに表示されます。</p>'+
+    '<div class="body"><div class="genrepick">'+pick+'</div></div></section>';
+
+  if(!draft.genre){
+    return adminShell('<h2>'+(editing?"メニューを直す":"メニューを追加する")+'</h2>'+
+      '<p class="lead">まずジャンルを選んでください。選ぶと続きの入力欄が出てきます。</p>'+s1,
+      '<div class="sticky"><div class="in"><button class="btn ghost" data-go="/admin">やめてもどる</button></div></div>');
+  }
+
+  var priceHint = k==="options"
+    ? "選択肢ごとに値段が違う場合は、ここは空欄のままで大丈夫です。"
+    : "税"+(settings.taxMode==="included"?"込":"抜")+"の値段を、半角の数字で入れてください。";
+  var s2='<section class="card"><h3><i>2</i>基本の内容</h3>'+
+    '<p class="hint">お客様の画面にそのまま出ます。</p><div class="body">'+
+    '<label class="f"><span>料理の名前<em>必須</em></span>'+
+      '<input class="inp" id="f-name" value="'+esc(draft.name)+'" placeholder="例：ボロネーゼ"></label>'+
+    '<label class="f"><span>値段'+(k==="options"?"":"<em>必須</em>")+'<b>'+esc(priceHint)+'</b></span>'+
+      '<span class="yen"><input class="inp" id="f-price" inputmode="numeric" value="'+esc(draft.price)+'" placeholder="1200"><b>円</b></span></label>'+
+    '<label class="f"><span>詳しい説明<b>使っている食材やおすすめの理由など。空欄でもかまいません。</b></span>'+
+      '<textarea class="inp" id="f-desc" placeholder="例：牛肉と豚肉をじっくり煮込んだ、当店いちばん人気のミートソースです。">'+esc(draft.desc)+'</textarea></label>'+
+    '<label class="f"><span>写真<b>スマホで撮った写真をそのまま選んでかまいません。</b></span>'+
+      '<span class="photo">'+
+      (draft.photo?'<img class="pv" src="'+picURL(draft.photo)+'" alt="">':'<span class="ph">写真なし</span>')+
+      '<span><input type="file" accept="image/*" id="f-photo" style="display:none">'+
+      '<button type="button" class="btn ghost sm" data-photo="1">'+(draft.photo?"写真を選びなおす":"写真を選ぶ")+'</button>'+
+      (draft.photo?' <button type="button" class="btn ghost sm" data-photo-x="1">写真を消す</button>':'')+
+      '</span></span></label></div></section>';
+
+  var s3="";
+  if(k==="course"){
+    var cl=draft.course.length?draft.course:[{name:"",desc:""}];
+    var rows=cl.map(function(c,i){
+      var ph=["例：本日の前菜 盛り合わせ","例：信州鱒のカルパッチョ","例：渡り蟹のトマトクリーム","例：牛ほほ肉の赤ワイン煮込み","例：本日のドルチェ"][i]||"例：料理名";
+      return '<div class="crow"><span class="no">'+(i+1)+'</span>'+
+        '<div class="fields">'+
+          '<input class="inp" data-course="'+i+'" value="'+esc(c.name)+'" placeholder="'+ph+'">'+
+          '<input class="inp small" data-course-desc="'+i+'" value="'+esc(c.desc)+'" placeholder="ひとこと説明（なくても大丈夫です）">'+
+        '</div>'+
+        '<button type="button" class="x" data-rm-course="'+i+'" aria-label="'+(i+1)+'皿目を消す">×</button></div>'; }).join("");
+    var filled=cl.filter(function(c){return c.name.trim()!=="";}).length;
+    s3='<section class="card"><h3><i>3</i>コースに出てくる料理</h3>'+
+      '<p class="hint">前菜からドルチェまで、出てくる順番に全部書いてください。何品でも増やせます。'+
+      '使わない行は空欄のままにしておけば、お客様の画面には出ません。</p>'+
+      '<div class="body"><div class="rows">'+rows+'</div>'+
+      '<button type="button" class="btn add" data-add-course="1">＋ 料理をもう一品ふやす</button>'+
+      '<p class="count">いま '+filled+' 品ぶん入っています</p></div></section>';
+  }else if(k==="half"){
+    s3='<section class="card"><h3><i>3</i>ハーフサイズ</h3>'+
+      '<p class="hint">ハーフをご用意している場合だけチェックを入れてください。</p><div class="body">'+
+      '<label class="check"><input type="checkbox" id="f-halfon" '+(draft.halfOn?"checked":"")+'>'+
+      '<span>ハーフサイズをご用意している<b>チェックすると、お客様の画面に「ハーフあり」と値段が出ます。</b></span></label>'+
+      (draft.halfOn?'<label class="f" style="margin-top:16px"><span>ハーフサイズの値段<em>必須</em></span>'+
+        '<span class="yen"><input class="inp" id="f-half" inputmode="numeric" value="'+esc(draft.halfPrice)+'" placeholder="800"><b>円</b></span></label>':'')+
+      '</div></section>';
+  }else{
+    var orows=(draft.options.length?draft.options:[{label:"",price:""}]).map(function(o,i){
+      return '<div class="row"><input class="inp" data-opt-label="'+i+'" value="'+esc(o.label)+'" placeholder="例：100g">'+
+        '<input class="inp p" data-opt-price="'+i+'" inputmode="numeric" value="'+esc(o.price)+'" placeholder="値段">'+
+        '<button type="button" class="x" data-rm-opt="'+i+'" aria-label="この行を消す">×</button></div>'; }).join("");
+    s3='<section class="card"><h3><i>3</i>選べる種類と値段</h3>'+
+      '<p class="hint">量やサイズを選べる場合に使います。たとえば「100g／1,200円」「200g／2,200円」のように入れてください。選べる種類がなければ、空欄のままで大丈夫です。</p>'+
+      '<div class="body"><div class="rows">'+orows+'</div>'+
+      '<button type="button" class="btn add" data-add-opt="1">＋ 種類をもう一つふやす</button></div></section>';
+  }
+
+  var sticky='<div class="sticky"><div class="in">'+
+    '<button class="btn ghost" data-go="'+(editing?"/admin/list":"/admin")+'">やめてもどる</button>'+
+    '<button class="btn" data-save="1" '+(saving?"disabled":"")+'>'+(saving?"保存しています…":(editing?"この内容で直す":"この内容で追加する"))+'</button></div></div>';
+
+  return adminShell('<h2>'+(editing?"メニューを直す":"メニューを追加する")+'</h2>'+
+    '<p class="lead">上から順に入れて、最後に下のボタンを押してください。</p>'+s1+s2+s3, sticky);
+}
+
+function viewSettings(){
+  var sample=withTax(1000);
+  return adminShell('<h2>税率とお店の設定</h2><p class="lead">メニューの値段の出し方と、お店の名前を決めます。</p>'+
+    '<section class="card"><h3><i>1</i>税率</h3>'+
+    '<p class="hint">ここを変えると、お客様の画面の値段がすべて一度に変わります。</p><div class="body">'+
+    '<label class="f"><span>税率</span><span class="yen">'+
+      '<input class="inp" id="s-rate" inputmode="decimal" value="'+esc(settings.taxRate)+'"><b>％</b></span></label>'+
+    '<label class="f"><span>メニュー登録のとき、値段はどちらで入れますか<b>いつも打ち込んでいる金額に合わせてください。お客様の画面はどちらを選んでも税込で表示されます。</b></span>'+
+      '<select class="inp" id="s-mode">'+
+      '<option value="excluded"'+(settings.taxMode==="excluded"?" selected":"")+'>税抜の値段を入れる（税率を足して表示）</option>'+
+      '<option value="included"'+(settings.taxMode==="included"?" selected":"")+'>税込の値段を入れる（そのまま表示）</option>'+
+      '</select></label>'+
+    '<label class="f"><span>1円未満の端数</span><select class="inp" id="s-round">'+
+      '<option value="floor"'+(settings.rounding==="floor"?" selected":"")+'>切り捨て</option>'+
+      '<option value="round"'+(settings.rounding==="round"?" selected":"")+'>四捨五入</option>'+
+      '<option value="ceil"'+(settings.rounding==="ceil"?" selected":"")+'>切り上げ</option></select></label>'+
+    '<div class="note">いまの設定だと、1,000円と登録した料理は <b>'+yen(sample)+'</b> と表示されます。</div>'+
+    '</div></section>'+
+    '<section class="card"><h3><i>2</i>お店の情報</h3>'+
+    '<p class="hint">お客様の画面のいちばん上に出ます。</p><div class="body">'+
+    '<label class="f"><span>お店の名前</span><input class="inp" id="s-shop" value="'+esc(settings.shopName)+'"></label>'+
+    '<label class="f"><span>ひとこと紹介<b>空欄でもかまいません。</b></span>'+
+      '<textarea class="inp" id="s-tag" placeholder="例：南イタリアの家庭料理を、信州の食材で。">'+esc(settings.tagline)+'</textarea></label>'+
+    '</div></section>',
+    '<div class="sticky"><div class="in"><button class="btn ghost" data-go="/admin">もどる</button>'+
+    '<button class="btn" data-settings="1">設定を保存する</button></div></div>');
+}
+
+/* ---------- 描画 ---------- */
+function render(){
+  var app=document.getElementById("app"), admin=route.view!=="menu";
+  document.body.className = admin?"admin":"";
+  if(!ready && !dbError){ app.innerHTML='<div class="loading">読み込んでいます…</div>'; return; }
+  if(route.view==="menu") app.innerHTML=viewMenu();
+  else if(route.view==="home") app.innerHTML=viewHome();
+  else if(route.view==="list") app.innerHTML=viewList();
+  else if(route.view==="form") app.innerHTML=viewForm();
+  else if(route.view==="settings") app.innerHTML=viewSettings();
+  document.title = admin ? "管理画面 — "+settings.shopName : settings.shopName+" — メニュー";
+}
+
+/* ---------- 操作 ---------- */
+document.addEventListener("click", function(e){
+  var t=e.target.closest("[data-go],[data-genre],[data-filter],[data-save],[data-settings],[data-photo],[data-photo-x],[data-add-course],[data-rm-course],[data-add-opt],[data-rm-opt],[data-del],[data-del-yes],[data-del-no],[data-up],[data-down]");
+  if(!t) return;
+  var d=t.dataset;
+  if(d.go!==undefined){ go(d.go); return; }
+  if(d.genre!==undefined){ grabForm(); draft.genre=d.genre; render(); return; }
+  if(d.filter!==undefined){ go("/admin/list/"+d.filter); return; }
+  if(d.save!==undefined){ save(); return; }
+  if(d.settings!==undefined){ saveSettings(); return; }
+  if(d.photo!==undefined){ var f=document.getElementById("f-photo"); if(f) f.click(); return; }
+  if(d.photoX!==undefined){ grabForm(); draft.photo=""; render(); return; }
+  if(d.addCourse!==undefined){ grabForm(); draft.course.push({name:"",desc:""}); render(); focusLast("[data-course]"); return; }
+  if(d.rmCourse!==undefined){ grabForm(); draft.course.splice(+d.rmCourse,1);
+    if(!draft.course.length) draft.course=[{name:"",desc:""}]; render(); return; }
+  if(d.addOpt!==undefined){ grabForm(); draft.options.push({label:"",price:""}); render(); focusLast("[data-opt-label]"); return; }
+  if(d.rmOpt!==undefined){ grabForm(); draft.options.splice(+d.rmOpt,1); if(!draft.options.length) draft.options=[{label:"",price:""}]; render(); return; }
+  if(d.del!==undefined){ confirmDel=items.filter(function(x){return x.id===d.del;})[0]||null; render(); return; }
+  if(d.delNo!==undefined){ confirmDel=null; render(); return; }
+  if(d.delYes!==undefined){ if(confirmDel) removeItem(confirmDel); return; }
+  if(d.up!==undefined||d.down!==undefined){
+    var id=d.up||d.down, f2=route.filter||"all", list=f2==="all"?sorted(items):byGenre(f2), i=-1;
+    for(var n=0;n<list.length;n++) if(list[n].id===id) i=n;
+    if(i>=0) swapOrder(list,i,d.up!==undefined?i-1:i+1);
+    return;
+  }
+});
+document.addEventListener("change", function(e){
+  if(e.target.id==="f-photo"){ pickPhoto(e.target.files&&e.target.files[0]); e.target.value=""; }
+  if(e.target.id==="f-halfon"){ grabForm(); draft.halfOn=e.target.checked; render(); }
+});
+function focusLast(sel){ var n=document.querySelectorAll(sel); if(n.length) n[n.length-1].focus(); }
+
+/* ---------- 起動 ---------- */
+route=readHash();
+if(route.view==="form") draft=makeDraft(route.id);
+render();
+
+(function(){
+  if(!apiConfigured()){
+    ready=true;
+    dbError="スプレッドシートとの接続先URLがまだ設定されていません。ページ上部の設定手順をご覧のうえ、コード内のAPI_URLを書き換えてください。";
+    render();
+    return;
+  }
+  function refresh(){
+    return loadAll().then(function(){
+      ready=true;
+      if(route.view==="form" && route.id && (!draft||draft.id!==route.id)) draft=makeDraft(route.id);
+      dbError=""; render();
+    }).catch(function(){
+      ready=true;
+      dbError="メニューの読み込みに失敗しました。接続先の設定、または通信状況をご確認ください。";
+      render();
+    });
+  }
+  refresh();
+  setInterval(refresh, 20000); /* 20秒ごとに最新のスプレッドシート内容を取り込む */
+  document.addEventListener("visibilitychange", function(){ if(!document.hidden) refresh(); });
+})();
+})();
+</script>
+</body>
+</html>
