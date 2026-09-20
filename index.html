@@ -10,15 +10,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Zen+Old+Mincho:wght@400;600;900&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ground:#0E2A23;
-  --ground-2:#143a30;
-  --ground-3:#1b4a3d;
-  --ivory:#F1EADA;
-  --ivory-dim:#c9c0ad;
-  --cobalt:#3B6FB5;
-  --amber:#DFA531;
-  --wine:#B23A48;
-  --line:rgba(241,234,218,.22);
+  --ground:#FBF6EC;
+  --ground-2:#F4E9D2;
+  --ground-3:#EADFC2;
+  --ivory:#28201A;
+  --ivory-dim:#6E6250;
+  --basil:#4B6B3D;
+  --amber:#B9812C;
+  --wine:#A6332E;
+  --line:rgba(40,32,26,.15);
 
   --a-bg:#EEF1EF;
   --a-card:#FFFFFF;
@@ -76,19 +76,24 @@ nav.genres button[aria-current="true"]{background:var(--ivory);color:var(--groun
 .gate{padding:64px 0 10px}
 .gate h2{font-family:var(--display);font-weight:400;font-size:clamp(30px,5vw,44px);margin:0}
 .gate .it{font-family:var(--display);font-style:italic;color:var(--amber);font-size:17px;margin:0 0 6px}
-.gate .rule{height:1px;background:var(--line);margin:22px 0 0}
+.gate .rule{height:2px;margin:22px 0 0;background:linear-gradient(90deg,var(--basil),var(--ground) 46%,var(--ground) 54%,var(--wine));opacity:.55}
 .notice{font-family:var(--serif);font-size:13.5px;color:var(--amber);background:var(--ground-2);
   border-left:3px solid var(--amber);border-radius:2px;padding:12px 16px;margin:22px 0 0;line-height:1.8}
 
-.offer{margin:22px 0 0;border:1px solid var(--amber);border-radius:3px;padding:22px 24px;
+.offer{margin:22px 0 0;border:1px solid var(--wine);border-radius:3px;padding:22px 24px;
   display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
-  background:linear-gradient(180deg,rgba(223,165,49,.10),rgba(223,165,49,0))}
-.offer .ol{font-family:var(--display);font-style:italic;color:var(--amber);font-size:13px;
+  background:linear-gradient(180deg,rgba(166,51,46,.08),rgba(166,51,46,0))}
+.offer .ol{font-family:var(--display);font-style:italic;color:var(--wine);font-size:13px;
   letter-spacing:.06em;margin:0 0 6px}
 .offer .ot{font-family:var(--serif);color:var(--ivory);font-size:15.5px;line-height:1.7;margin:0;max-width:32em}
-.offer .op{font-family:var(--display);color:var(--amber);font-size:32px;line-height:1;margin:0;white-space:nowrap}
+.offer .op{font-family:var(--display);color:var(--wine);font-size:32px;line-height:1;margin:0;white-space:nowrap}
 .offer .op span{font-size:16px;margin-left:2px}
 .offer .op i{display:block;font-style:normal;font-family:var(--sans);color:var(--ivory-dim);font-size:12px;margin-top:6px;text-align:right}
+.offer .onote{flex:1 1 100%;order:3;margin:14px 0 0;padding:12px 0 0;border-top:1px dashed var(--line);
+  list-style:none;display:grid;gap:6px}
+.offer .onote li{font-family:var(--sans);font-size:12.5px;color:var(--ivory-dim);line-height:1.7;
+  padding-left:1.1em;position:relative}
+.offer .onote li::before{content:"※";position:absolute;left:0;color:var(--wine)}
 @media (max-width:560px){.offer{padding:18px}.offer .op{font-size:27px}}
 
 .dish{display:grid;grid-template-columns:96px 1fr;gap:20px;padding:28px 0;border-bottom:1px solid var(--line);align-items:start}
@@ -107,7 +112,7 @@ nav.genres button[aria-current="true"]{background:var(--ivory);color:var(--groun
 .sub .p{font-family:var(--display);color:var(--ivory);white-space:nowrap}
 .corso{margin:14px 0 0;padding:16px 18px;background:var(--ground-2);border-left:3px solid var(--amber);border-radius:2px}
 .corso ol{margin:0;padding-left:1.2em;display:grid;gap:11px;font-family:var(--serif);font-size:14.5px;line-height:1.7;color:var(--ivory)}
-.corso ol li::marker{color:var(--amber)}
+.corso ol li::marker{color:var(--basil)}
 .corso ol li span{display:block;color:var(--ivory-dim);font-size:13px;line-height:1.8;margin-top:2px}
 .tag{display:inline-block;font-family:var(--sans);font-size:11px;letter-spacing:.08em;color:var(--ground);
   background:var(--amber);border-radius:2px;padding:2px 7px;margin-left:8px;vertical-align:3px;font-weight:700}
@@ -474,8 +479,12 @@ function pickPhoto(file){
 function setOffer(k){
   if(k==="pasta_dry"||k==="pasta_fresh"||k==="meat"||k==="fish")
     return '<div class="offer"><p class="ol">お得なセット</p>'+
-      '<p class="ot">自家製ドレッシングのサラダ・パン・お飲み物</p>'+
-      '<p class="op">560<span>円</span><i>（税込610円）</i></p></div>';
+      '<p class="ot">自家製ドレッシングのサラダ＋パン＋お飲み物</p>'+
+      '<p class="op">560<span>円</span><i>（税込610円）</i></p>'+
+      '<ul class="onote">'+
+        '<li>お飲み物はノンアルコールからお選びください</li>'+
+        '<li>こちらのセットをご注文の方はデザートがどれでも一つ￥280です</li>'+
+      '</ul></div>';
   return "";
 }
 function pastaNotice(k){
